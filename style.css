@@ -13,7 +13,7 @@
 }
 
 .footer {
-    
+    position: static;
     text-align: center;
     background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
     color: white;
@@ -32,6 +32,17 @@ body {
     text-align: center;
 }
 
+.content-div {
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    width: 100px;
+    height: 250px;
+    margin-right: auto;
+}
+
 nav ul li {
     display: flex;
     justify-content: start;
@@ -41,7 +52,19 @@ nav ul li a:hover {
     background: rgb(167, 148, 241);
 }
 
+
 .icon {
     display: inline-block;
     width: 25px;
+}
+
+.data-div {
+	margin-left: 10px;
+	width: 90%;
+	padding: 5px 5px 5px 5px;
+    
+}
+.rocket {
+	border: 1px solid #aaddff;
+	background-color: #bbddff;
 }
