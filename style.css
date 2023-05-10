@@ -35,6 +35,13 @@ body {
 .content-div {
     display: flex;
     justify-content: center;
+
+}
+
+.conteiner {
+    position: static;
+    text-align: center;
+    background: white;
 }
 
 nav {
@@ -59,12 +66,32 @@ nav ul li a:hover {
 }
 
 .data-div {
-	margin-left: 10px;
+    display: flex;
+    margin-left: 10px;
 	width: 90%;
 	padding: 5px 5px 5px 5px;
-    
+    justify-content: space-around;
 }
+/* .data-div div {
+    display: flex;
+    flex-direction: row;
+} */
 .rocket {
-	border: 1px solid #aaddff;
-	background-color: #bbddff;
+	border: 2px solid rgba(84, 58, 183, 1);
+    border-radius: 20px;
+    margin: 0px 10px 10px 10px;
+    height: 100px;
+}
+
+.list-item {
+    text-align: center;
+}
+
+.crew {
+    justify-content: center;
+    margin-left: auto;
+	border: 2px solid rgba(84, 58, 183, 1);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    
 }
