@@ -3,37 +3,51 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<div class="header">
-    <h1>Rocket Project</h1>
-</div>
-
 <body>
-    <div class="content-div">
-        <div class="conteiner">
-            <nav>
-                <ul>
-                    <li><a href="#"><img src="./images/icon-home.png" class="icon"></a></li>
-                    <li><a href="./src/view/rocket.html"><img src="./images/icon-rocket.png" class="icon"></a></li>
-                    <li><a href="./src/view/crewman.html"><img src="./images/icon-crewman.gif" class="icon"></a></li>
-                    <li><a href="./src/view/crew.html"><img src="./images/icon-crew.png" class="icon"></a></li>
-                    <li><a href="./src/view/launch.html"><img src="./images/icon-launch.png" class="icon"></a></li>
-                </ul>
-            </nav>
+
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Rocket Project</h3>
         </div>
-        <div class="data-div">
-            <div id="rocketList"></div>
-            <div id="crewList"></div>
+    </header>
+
+    <div class="global">
+        <div class="sidebar">
+
+            <a href="#"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="./src/view/rocket.html"><i class="fas fa-light fa-rocket"></i><span>Rocket</span></a>
+            <a href="./src/view/crewman.html"><i class="fas fa-light fa-user"></i><span>Crewman</span></a>
+            <a href="./src/view/crew.html"><i class="fas fa-light fa-users"></i><span>Crew</span></a>
+            <a href="./src/view/launch.html"><i class="fas fa-light fa-play"></i><span>Launch</span></a>
+
         </div>
+
+        <!-- <div class="content">
+            <div class="data-div"> 
+                <div id="rocketList"></div>
+                <div id="crewmanList"></div>
+                <div id="crewList"></div>
+           </div> 
+        </div> -->
     </div>
-    <div class="footer">
-        <h5>Biuld with love ❤️ at <a href="https://www.joinplank.com/">fellowship plank </a> </h5>
-    </div>
+    <footer>
+        <h5>Biuld with ❤️ at <a href="https://www.joinplank.com/">fellowship plank </a> </h5>
+
+
+    </footer>
 </body>
+<!-- 
+
 
 <script src="./src/script/rocket.js"></script>
 <script src="./src/script/crew.js"></script>
-
+<script src="./src/script/crewman.js"></script> -->
 
 </html>

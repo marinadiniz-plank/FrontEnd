@@ -18,7 +18,13 @@ function rendercrew(parentDiv, crew, crewClasses) {
 	crewClasses.forEach(crewClass => crewDiv.classList.add(crewClass));
 	crewDiv.innerHTML = "" +
 		"<strong>ID:</strong> " + crew.id +
-		"<br><strong>Name:</strong> " + crew.name;
+		"<br><strong>Name:</strong> " + crew.name +
+		"<br><strong>Crewman</strong> <br><br>";
+	crew.crewman.forEach(crewman => rendercrewman( 
+		crewDiv,
+		crewman,
+        ["sub-list-item"]
+	));
 	parentDiv.appendChild(crewDiv);
 }
 
