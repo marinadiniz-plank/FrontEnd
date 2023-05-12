@@ -1,5 +1,6 @@
+const crewList = document.getElementById("crew-table-body");
+
 document.addEventListener("DOMContentLoaded", () => {
-	var crewList = document.getElementById("crewList");
 	rendercrewList(crewList);
 });
 
@@ -9,23 +10,52 @@ function rendercrewList(crewListDiv) {
 		.then(data => data.forEach(crew => rendercrew(
 			crewListDiv,
 			crew,
-			["list-item", "crew"]
-		))).catch(error => handleRequestError(error, crewListDiv, "crew"));
+			["list-item"]
+		))).catch(error => handleRequestError(error, crewListDiv));
 }
 
 function rendercrew(parentDiv, crew, crewClasses) {
-	const crewDiv = document.createElement("div");
-	crewClasses.forEach(crewClass => crewDiv.classList.add(crewClass));
-	crewDiv.innerHTML = "" +
-		"<strong>ID:</strong> " + crew.id +
-		"<br><strong>Name:</strong> " + crew.name +
-		"<br><strong>Crewman</strong> <br><br>";
-	crew.crewman.forEach(crewman => rendercrewman( 
-		crewDiv,
-		crewman,
-        ["sub-list-item"]
-	));
-	parentDiv.appendChild(crewDiv);
+	crewClasses.forEach(crewClass => {
+		const row = document.createElement("tr");
+		const idCell = document.createElement("td");
+		const nomeCell = document.createElement("td");
+		const crewmanCell = document.createElement("td");
+		const editCell = document.createElement("td");
+		const deleteCell = document.createElement("td");
+
+
+		idCell.textContent = crew.id;
+		nomeCell.textContent = crew.name;
+		crewmanCell.textContent = [crew.crewman.map(crewmans => crewmans.id)];
+		
+	
+		const editButton = document.createElement("button");
+		editButton.classList.add("edit_button");
+	
+		const deleteButton = document.createElement("button");
+		deleteButton.classList.add("delete_button");
+
+		editButton.addEventListener("click", () => {
+			// Abre o formulário de edição preenchido com os dados da linha selecionada
+			console.log(`Editar linha ${crew.id}`);
+		  });
+	  
+		  deleteButton.addEventListener("click", () => {
+			// Remove a linha selecionada da tabela
+			row.remove();
+		  });
+	  
+		  editCell.appendChild(editButton);
+		  deleteCell.appendChild(deleteButton);
+	  
+		  row.appendChild(idCell);
+		  row.appendChild(nomeCell);
+		  row.appendChild(crewmanCell);
+		  row.appendChild(editCell);
+		  row.appendChild(deleteCell);
+	  
+		  parentDiv.appendChild(row);
+		});
 }
 
 function handleRequestError(error, parentDiv, colorClass) {

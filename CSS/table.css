@@ -1,0 +1,64 @@
+.divTable {
+    padding: 10px;
+    width: auto;
+    height: inherit;
+    overflow: auto;
+  }
+  
+  .divTable::-webkit-scrollbar {
+    width: 12px;
+    background-color: whitesmoke;
+  }
+  
+  .divTable::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: darkgray;
+  }
+  
+  table {
+    width: 100%;
+    border-spacing: 10px;
+    word-break: break-all;
+    border-collapse: collapse;
+    display: table;
+  }
+  
+  thead {
+    background-color: whitesmoke;
+  }
+  
+  tr {
+    border-bottom: 1px solid rgb(238, 235, 235) !important;
+  }
+  
+  tbody tr td {
+    vertical-align: text-top;
+    padding: 6px;
+    max-width: 50px;
+  
+  }
+  
+  thead tr th {
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 50px;
+  }
+  
+  tbody tr {
+    margin-bottom: 50px;
+  }
+  
+  .edit_button::before{
+      font: var(--fa-font-solid);
+      content: "\f044";
+  }
+  
+  .delete_button::before{
+      font: var(--fa-font-solid);
+      content: "\f1f8";
+  }
+  
+  
+  

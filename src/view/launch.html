@@ -2,7 +2,10 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../CSS/main.css">
+    <link rel="stylesheet" href="../../CSS/sidebar.css">
+    <link rel="stylesheet" href="../../CSS/table.css">
+    <link rel="stylesheet" href="../../CSS/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -18,7 +21,7 @@
         </div>
         <div class="right_area">
             <a href="#" class="add_btn">
-                <i class="fas fa-light fa-plus" ></i>add</a>
+                <i class="fas fa-light fa-plus"></i>add</a>
         </div>
     </header>
 
@@ -31,19 +34,50 @@
             <a href="../view/crew.html"><i class="fas fa-light fa-users"></i><span>Crew</span></a>
             <a href="#"><i class="fas fa-light fa-play"></i><span>Launch</span></a>
 
+        </div>
+
+        <div class="data-div">
+            <div class="divTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Launch Code</th>
+                            <th>date</th>
+                            <th>success</th>
+                            <th>rocket</th>
+                            <th>crew</th>
+                            <th class="edit_btn">
+                                Editar
+                            </th>
+                            <th class="delete_btn">
+                                Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="launch-table-body">
+                    </tbody>
+                </table>
+
+                <!-- Modal para editar o nome -->
+                <div id="edit-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Editar nome</h2>
+                        <form>
+                            <label for="name-input">Novo nome:</label>
+                            <input type="text" id="name-input" name="name"><br>
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-        <div class="content">
-            <div class="data-div"> 
-                <div id="launchList"></div>
-           </div> 
-        </div>
+
     </div>
     <footer>
         <h5>Biuld with ❤️ at <a href="https://www.joinplank.com/">fellowship plank </a> </h5>
-
-
     </footer>
 </body>
 <script src="../script/crew.js"></script>
