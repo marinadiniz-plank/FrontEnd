@@ -1,5 +1,4 @@
 const crewmanList = document.getElementById("crewman-table-body");
-var crewman_qnt = 0;
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -53,9 +52,7 @@ function rendercrewman(parentDiv, crewman, crewmanClasses) {
 		
 
 		parentDiv.appendChild(row);
-
-		const rowCount = crewmanList.lenght;
-		localStorage.setItem("crewman_qnt", rowCount);
+		countCrewman();
 	});
 }
 
@@ -67,4 +64,9 @@ function handleRequestError(error, parentDiv, colorClass) {
 		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
 		parentDiv.appendChild(childDiv);
 	}
+}
+
+function countCrewman(){
+	var rowCount = document.getElementById("crewman-table-body").rows.length;
+	localStorage.setItem("crewman_qnt", rowCount);
 }

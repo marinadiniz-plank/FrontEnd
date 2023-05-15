@@ -85,6 +85,7 @@ function renderlaunch(parentDiv, launch, launchClasses) {
     row.appendChild(deleteCell);
 
     parentDiv.appendChild(row);
+    countLaunch();
   });
 }
 
@@ -196,4 +197,9 @@ function handleRequestError(error, parentDiv) {
     childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
     parentDiv.appendChild(childDiv);
   }
+}
+
+function countLaunch(){
+	var rowCount = document.getElementById("launch-table-body").rows.length;
+	localStorage.setItem("launch_qnt", rowCount);
 }

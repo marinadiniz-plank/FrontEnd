@@ -75,6 +75,8 @@ function renderRocket(parentDiv, rocket, rocketClasses) {
     row.appendChild(editCell);
     row.appendChild(deleteCell);
     parentDiv.appendChild(row);
+
+	countRocket();
   });
 }
 
@@ -178,4 +180,9 @@ function handleRequestError(error, parentDiv) {
     childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
     parentDiv.appendChild(childDiv);
   }
+}
+
+function countRocket(){
+	var rowCount = document.getElementById("rocket-table-body").rows.length;
+	localStorage.setItem("rocket_qnt", rowCount);
 }

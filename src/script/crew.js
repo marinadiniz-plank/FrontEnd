@@ -55,6 +55,7 @@ function rendercrew(parentDiv, crew, crewClasses) {
 		  row.appendChild(deleteCell);
 	  
 		  parentDiv.appendChild(row);
+		  countCrew();
 		});
 }
 
@@ -66,4 +67,9 @@ function handleRequestError(error, parentDiv, colorClass) {
 		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
 		parentDiv.appendChild(childDiv);
 	}
+}
+
+function countCrew(){
+	var rowCount = document.getElementById("crew-table-body").rows.length;
+	localStorage.setItem("crew_qnt", rowCount);
 }
