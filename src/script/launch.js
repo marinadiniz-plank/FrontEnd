@@ -1,6 +1,24 @@
 const launchList = document.getElementById("launch-table-body");
 
+const closeAddLaunchModalButton = document.getElementById("add-launch-modal-close-button");
+const closeUpdateLaunchModalButton = document.getElementById("update-launch-modal-close-button");
+const addLaunchModal = document.getElementById("add-launch-modal");
+const updateLaunchModal = document.getElementById("update-launch-modal");
+const addLaunchModalForm = document.getElementById("add-launch-modal-form");
+const updateLaunchModalForm = document.getElementById("update-launch-modal-form");
+const addLaunchButton = document.getElementById("add_btn");
+
+let updateLaunchId;
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  if (addLaunchButton) addLaunchButton.addEventListener("click", () => addLaunchModal.style.display = "block");
+	if (closeAddLaunchModalButton) closeAddLaunchModalButton.addEventListener("click", () => addLaunchModal.style.display = "none");
+	if (addLaunchModalForm) addLaunchModalForm.addEventListener("submit", (event) => addLaunch(event));
+
+	if (closeUpdateLaunchModalButton) closeUpdateLaunchModalButton.addEventListener("click", () => updateLaunchModal.style.display = "none");
+	if (updateLaunchModalForm) updateLaunchModalForm.addEventListener("submit", (event) => updateLaunch(event));
+
   renderlaunchList(launchList);
 });
 
@@ -44,11 +62,14 @@ function renderlaunch(parentDiv, launch, launchClasses) {
     editButton.addEventListener("click", () => {
       // Abre o formulário de edição preenchido com os dados da linha selecionada
       console.log(`Editar linha ${launch.id}`);
+      editUpdateLaunchModal(launch);
     });
 
     deleteButton.addEventListener("click", () => {
       // Remove a linha selecionada da tabela
       row.remove();
+      deleteLaunch(launch);
+      
     });
 
     editCell.appendChild(editButton);
@@ -67,11 +88,111 @@ function renderlaunch(parentDiv, launch, launchClasses) {
   });
 }
 
-function handleRequestError(error, parentDiv, colorClass) {
+function addLaunch(event) {
+
+	event.preventDefault();
+
+	const createLaunch = {
+		launchCode: `${document.getElementById("add-launch-form-launchCode").value}`,
+    date: `${document.getElementById("add-launch-form-date").value}`,
+    success: `${document.getElementById("add-launch-form-success").value}`,
+    rocket: `${document.getElementById("add-launch-form-rocket").value}`,
+    crew: `${document.getElementById("add-launch-form-crew").value}`
+	};
+
+	fetch(`http://localhost:80/launch`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createLaunch)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const launchList = document.getElementById("launch-table-body");
+			renderLaunchList(launchList);
+
+			addLaunchModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not create launch\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+
+}
+
+function updateLaunch(event) {
+
+	event.preventDefault();
+
+	const createLaunch = {
+		launchCode: `${document.getElementById("add-launch-form-launchCode").value}`,
+    date: `${document.getElementById("add-launch-form-date").value}`,
+    success: `${document.getElementById("add-launch-form-success").value}`,
+    rocket: `${document.getElementById("add-launch-form-rocket").value}`,
+    crew: `${document.getElementById("add-launch-form-crew").value}`
+	};
+
+	fetch(`http://localhost:80/launch/${updateLaunchId}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createLaunch)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const launchList = document.getElementById("launch-table-body");
+			renderLaunchList(launchList);
+
+			updateLaunchModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not update launch:\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+
+}
+
+function deleteLaunch(launch) {
+
+	const launchId = launch.id;
+
+	console.log(`Delete launch ${launchId}`);
+
+	fetch(`http://localhost:80/launch/${launchId}`, { method: 'DELETE' })
+		.then(async response => {
+
+			if (response.ok) {
+
+				const launchList = document.getElementById("launch-table-body");
+
+				renderLaunchList(launchList);
+
+			} else {
+				const data = await response.json();
+				alert(`Could not delete the launch of id ${launchId}:\n\n${data.message}`);
+			}
+
+		}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+}
+
+function editUpdateLaunchModal(launch) {
+	updateLaunchId = launch.id;
+	document.getElementById("update-launch-form-name").value = launch.name
+	updateLaunchModal.style.display = "block";
+}
+
+function handleRequestError(error, parentDiv) {
   if (parentDiv) {
     var childDiv = document.createElement("div");
     childDiv.classList.add("list-item");
-    childDiv.classList.add(colorClass);
     childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
     parentDiv.appendChild(childDiv);
   }

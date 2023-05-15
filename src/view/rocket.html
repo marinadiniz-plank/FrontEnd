@@ -20,8 +20,8 @@
             <h3>Rocket</h3>
         </div>
         <div class="right_area">
-            <a href="#" class="add_btn">
-                <i class="fas fa-light fa-plus"></i>add</a>
+            <a href="#" id="add_btn">
+                <i class="fas fa-light fa-plus" ></i>add</a>
         </div>
     </header>
 
@@ -54,24 +54,40 @@
                     </tbody>
                 </table>
 
-                <!-- Modal para editar o nome -->
-                <div id="edit-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Editar nome</h2>
-                        <form>
-                            <label for="name-input">Novo nome:</label>
-                            <input type="text" id="name-input" name="name"><br>
-                            <button type="submit">Salvar</button>
-                        </form>
-                    </div>
-                </div>
             </div>
 
         </div>
 
 
     </div>
+
+    <div class="modal" id="add-rocket-modal">
+        <div class="modal-content">
+            <span class="close" id="add-rocket-modal-close-button">&times;</span>
+            <h2>Add Rocket</h2>
+            <form id="add-rocket-modal-form">
+                <label for="name">Name:</label>
+                <input type="text" id="add-rocket-form-name" name="name" required>
+                <button type="submit">
+                    <h4>Add</h4>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="update-rocket-modal">
+        <div class="modal-content">
+            <span class="close" id="update-rocket-modal-close-button">&times;</span>
+            <h2>Update Rocket</h2>
+            <form id="update-rocket-modal-form">
+                <label for="name">Name:</label>
+                <input type="text" id="update-rocket-form-name" name="name" required>
+                <button type="submit">
+                    <h4>Update</h4>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <h5>Biuld with ❤️ at <a href="https://www.joinplank.com/">fellowship plank </a> </h5>
 

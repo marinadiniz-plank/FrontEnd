@@ -52,7 +52,7 @@ footer {
   margin-top: 40px;
 }
 
-.add_btn {
+#add_btn {
   border-radius: 20px;
   border: 2px solid white;
   color: white;
