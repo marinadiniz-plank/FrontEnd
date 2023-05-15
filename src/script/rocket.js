@@ -8,10 +8,10 @@ const addRocketModalForm = document.getElementById("add-rocket-modal-form");
 const updateRocketModalForm = document.getElementById("update-rocket-modal-form");
 const addRocketButton = document.getElementById("add_btn");
 
+const notification = document.getElementById("rocketNotification");
+
+
 let updateRocketId;
-
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function renderRocketList(rocketListDiv) {
+	rocketList.innerHTML = "";
   fetch("http://localhost:80/rocket")
     .then((response) => response.json())
     .then((data) =>
@@ -38,6 +39,7 @@ function renderRocketList(rocketListDiv) {
 }
 
 function renderRocket(parentDiv, rocket, rocketClasses) {
+
   rocketClasses.forEach((rocketClass) => {
     const row = document.createElement("tr");
     const idCell = document.createElement("td");
@@ -58,6 +60,7 @@ function renderRocket(parentDiv, rocket, rocketClasses) {
       // Abre o formulário de edição preenchido com os dados da linha selecionada
       console.log(`Editar linha ${rocket.id}`);
       editUpdateRocketModal(rocket);
+	  showNotification("Successfully, rocket updated!");
     });
 
 
@@ -65,6 +68,7 @@ function renderRocket(parentDiv, rocket, rocketClasses) {
       // Remove a linha selecionada da tabela
       row.remove();
       deleteRocket(rocket);
+	  showNotification("Successfully, rocket deleted!");
     });
 
     editCell.appendChild(editButton);
@@ -98,17 +102,16 @@ function addRocket(event) {
 
 		if (response.ok) {
 
-			const rocketList = document.getElementById("rocket-table-body");
 			renderRocketList(rocketList);
-
 			addRocketModal.style.display = "none";
-
+			
 		} else {
 			const data = await response.json();
 			alert(`Could not create rocket\n\n${data.message}`);
 		}
-
+		
 	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+	showNotification("Successfully, rocket created!")
 
 }
 
@@ -130,7 +133,6 @@ function updateRocket(event) {
 
 		if (response.ok) {
 
-			const rocketList = document.getElementById("rocket-table-body");
 			renderRocketList(rocketList);
 
 			updateRocketModal.style.display = "none";
@@ -153,13 +155,7 @@ function deleteRocket(rocket) {
 	fetch(`http://localhost:80/rocket/${rocketId}`, { method: 'DELETE' })
 		.then(async response => {
 
-			if (response.ok) {
-
-				const rocketList = document.getElementById("rocket-table-body");
-
-				renderRocketList(rocketList);
-
-			} else {
+			if (!response.ok) {
 				const data = await response.json();
 				alert(`Could not delete the rocket of id ${rocketId}:\n\n${data.message}`);
 			}
@@ -173,16 +169,27 @@ function editUpdateRocketModal(rocket) {
 	updateRocketModal.style.display = "block";
 }
 
-function handleRequestError(error, parentDiv) {
-  if (parentDiv) {
-    var childDiv = document.createElement("div");
-    childDiv.classList.add("list-item");
-    childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-    parentDiv.appendChild(childDiv);
-  }
+function handleRequestError(error) {
+	showNotification(" <strong>Error: </strong> " + error.message);
 }
 
 function countRocket(){
 	var rowCount = document.getElementById("rocket-table-body").rows.length;
 	localStorage.setItem("rocket_qnt", rowCount);
 }
+
+function showNotification(message) {
+	const notificationContent = document.createElement("div");
+
+	notification.classList.add("rocket-notify-text");
+	notification.innerHTML = `<p>${message}</p>`;
+
+	notification.appendChild(notificationContent);
+	notification.classList.add('active');
+	
+	
+	setTimeout(function() {
+	  notification.classList.remove('active');
+	}, 5000);
+  }
+  
